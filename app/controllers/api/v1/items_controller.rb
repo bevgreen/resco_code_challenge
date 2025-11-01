@@ -4,7 +4,11 @@ class Api::V1::ItemsController < ApplicationController
   end
 
   def show
-    # binding.pry
-    render json: Item.find(params[:id])
+    item = Item.find_by(id: params[:id])
+    if item
+        render json: item
+    else
+        render json: { error: "Item not found" }, status: :not_found
+    end
   end
 end
