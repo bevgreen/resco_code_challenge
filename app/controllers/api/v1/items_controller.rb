@@ -1,12 +1,10 @@
 class Api::V1::ItemsController < ApplicationController
   def index
-    render json: {
-      example_key: {
-        example_nested_key: "It worked!"
-      },
-      example_array_key: [
-        "Array item 1", "Array item 2"
-      ]
-    }
+    render json: Item.all
+  end
+
+  def show
+    # binding.pry
+    render json: Item.find(params[:id])
   end
 end
