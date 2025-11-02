@@ -1,0 +1,21 @@
+# <h1><%= @item['name'] %></h1>
+# <p><strong>Description:</strong> <%= @item['description'] %></p>
+# <p><strong>Number:</strong> <%= @item['number'] %></p>
+# <p><strong>Status:</strong> <%= @item['status'] %></p>
+<h1 class="text-2xl font-bold mb-4"><%= @item['name'] %></h1>
+
+<div class="space-y-2">
+  <p><strong>Description:</strong> <%= @item['description'] %></p>
+  <p><strong>Number:</strong> <%= @item['number'] %></p>
+  <p><strong>Status:</strong> <%= @item['status'] %></p>
+
+  <% if @item['image'].present? %>
+    <div>
+      <img src="<%= @item['image'] %>" alt="<%= @item['name'] %>" class="rounded shadow-md w-64" />
+    </div>
+  <% end %>
+</div>
+
+<div class="mt-6">
+  <%= link_to "← Back to Items List", items_path, class: "text-blue-600 hover:underline" %>
+</div>
