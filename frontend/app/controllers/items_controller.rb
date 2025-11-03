@@ -1,6 +1,7 @@
 class ItemsController < ApplicationController
 
-  BACKEND_URL = "http://localhost:3000/api/v1/items"
+  BACKEND_URL = ENV['BACKEND_URL'] || "http://localhost:3000/api/v1/items"
+
   def index
     response = Faraday.get(BACKEND_URL)
     @items = JSON.parse(response.body)
