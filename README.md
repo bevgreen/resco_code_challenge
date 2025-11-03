@@ -1,7 +1,10 @@
 # RESCO Code Challenge
 
 This project is a Ruby on Rails full-stack app with a frontend and backend service for managing items.
-
+## Quick Start
+```shell
+./start_app.sh
+```
 ## Table of Contents
 
 - [Project Overview](#project-overview)
@@ -13,7 +16,7 @@ This project is a Ruby on Rails full-stack app with a frontend and backend servi
 - [Running the App](#running-the-app)
 - [Running Tests](#running-tests)
 - [Services](#services)
-- [Deployment Instructions](#deployment-instructions)
+
 
 ## Project Overview
 
@@ -70,9 +73,12 @@ rails db:seed
 
 ## Running the App
 
-We have a shell script to set up and run both services at once:
+There is a shell script to set up and run both services at once:
 
+
+```shell
 ./start_app.sh
+```
 
 This script will:
 
@@ -118,10 +124,3 @@ This includes:
 - No external job queues or cache servers needed for this project.
 - Backend and frontend communicate via REST API.
 
-## Deployment Instructions
-
-1. Ensure Ruby 3.2.2 and PostgreSQL are installed.
-2. Clone the repo.
-3. Run `./start_app.sh` locally.
-4. Adjust `BACKEND_URL` if deploying backend separately.
-5. Deploy Rails apps as normal (e.g., using Heroku, Render, or VPS).
