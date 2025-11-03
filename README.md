@@ -1,10 +1,14 @@
 # RESCO Code Challenge
 
 This project is a Ruby on Rails full-stack app with a frontend and backend service for managing items.
-## Quick Start
+
+## Dockerized Quick Start
 ```shell
-./start_app.sh
+docker-compose up --build
 ```
+- View the frontend at [http://localhost:3001](http://localhost:3001) (note https will not work with current Ruby configuration)
+- curl the backend at `curl http://localhost:3000/api/v1/items`
+
 ## Table of Contents
 
 - [Project Overview](#project-overview)

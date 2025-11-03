@@ -1,47 +1,54 @@
 version: "3.9"
 
 services:
-  backend:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile
-    container_name: resco_backend
-    environment:
-      RAILS_ENV: development
-    ports:
-      - "3000:3000"
-    volumes:
-      - ./backend:/rails
-    command: ./bin/rails server -b 0.0.0.0 -p 3000
-    depends_on:
-      - db
-
-  frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-    container_name: resco_frontend
-    environment:
-      RAILS_ENV: development
-    ports:
-      - "3001:3000"
-    volumes:
-      - ./frontend:/rails
-    command: ./bin/rails server -b 0.0.0.0 -p 3000
-    depends_on:
-      - backend
-
   db:
     image: postgres:15
     container_name: resco_db
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: resco_development
+      POSTGRES_USER: rails
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: resco_app
+    volumes:
+      - db_data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
-    volumes:
-      - pgdata:/var/lib/postgresql/data
+
+  backend:
+    build:
+      context: ./backend
+    container_name: resco_backend
+    environment:
+      SECRET_KEY_BASE: ${SECRET_KEY_BASE:-dummy_secret_key_base}
+      DATABASE_URL: postgresql://rails:password@db:5432/resco_app
+      RAILS_ENV: production
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    command: >
+      bash -c "
+        rm -f tmp/pids/server.pid &&
+        bundle exec rails db:drop db:create db:migrate db:seed &&
+        bundle exec rails s -b 0.0.0.0 -p 3000
+      "
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: resco_frontend
+    environment:
+      SECRET_KEY_BASE: ${SECRET_KEY_BASE:-dummy_secret_key_base}
+      RAILS_ENV: production
+      BACKEND_URL: http://backend:3000/api/v1/items
+    ports:
+      - "3001:3001"
+    depends_on:
+      - backend
+    command: >
+      bash -c "
+        rm -f tmp/pids/server.pid &&
+        bundle exec rails s -b 0.0.0.0 -p 3001
+      "
 
 volumes:
-  pgdata:
+  db_data:
