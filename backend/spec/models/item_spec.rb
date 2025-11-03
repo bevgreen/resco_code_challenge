@@ -29,11 +29,6 @@ RSpec.describe Item, type: :model do
       expect(item).not_to be_valid
     end
 
-    it "is invalid without a number" do
-      item = Item.new(name: "Kitten", description: "A fluffy kitten", status: "Available")
-      expect(item).not_to be_valid
-    end
-
     it "is invalid with a number less than 1" do
       item = Item.new(name: "Kitten", description: "A fluffy kitten", number: 0, status: "Available")
       expect(item).not_to be_valid

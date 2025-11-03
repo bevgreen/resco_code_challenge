@@ -1,10 +1,17 @@
 <div class="max-w-xl mx-auto bg-white shadow-lg rounded-2xl p-6">
+
+  <div class="mt-6">
+    <%= link_to "← Back to Items List", items_path, class: "text-blue-600 hover:underline" %>
+  </div>
+
   <% if @item['image'].present? %>
-    <img 
-      src="<%= @item['image'] %>" 
-      alt="<%= @item['name'] %>" 
-      class="rounded-lg w-full h-64 object-cover mb-4"
-    />
+    <div class="mb-4 flex justify-center">
+      <div class="w-[300px] h-[300px] overflow-hidden rounded-lg shadow-sm">
+        <img src="<%= @item['image'] %>" 
+             alt="<%= @item['name'] %>" 
+             class="w-full h-full object-cover">
+      </div>
+    </div>
   <% end %>
 
   <h1 class="text-3xl font-bold text-gray-800 mb-2"><%= @item['name'] %></h1>
@@ -15,7 +22,4 @@
     <p><span class="font-semibold">Status:</span> <%= @item['status'] %></p>
   </div>
 
-  <div class="mt-6">
-    <%= link_to "← Back to Items List", items_path, class: "text-blue-600 hover:underline" %>
-  </div>
 </div>

@@ -5,4 +5,11 @@ class Item < ApplicationRecord
                      numericality: { only_integer: true, greater_than: 0 }
     STATUSES = ["Available", "Decommissioned", "Expired"]
   validates :status, presence: true, inclusion: { in: STATUSES }
+  before_validation :assign_number, on: :create
+
+  private
+
+  def assign_number
+    self.number ||= (Item.maximum(:number) || 0) + 1
+  end
 end

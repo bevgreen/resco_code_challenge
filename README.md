@@ -1,32 +1,41 @@
 # RESCO Code Challenge
 
-This repository serves as a template for our open position in Ruby on Rails Developer. This main README will contain the requirements for the code challenge.
+This project is a Ruby on Rails code challenge with two services: **Backend** (API / data) and **Frontend** (visual / Rails UI). The frontend interacts with the backend via API requests to display and create `Item` records.
 
-The challenge requires two services (as shown in the folder structure), one for the visual portion, and the other for the backend / data portion. They need to interact with each other via requests. For the Frontend to present data that is stored in the Backend.
+---
 
-All services are **required** to use Ruby on Rails, and use a SQL-Like database to store the data (preferably PostgreSQL).
+## Table of Contents
 
-## The Frontend
-The Frontend is the visual part of the challenge. This system should contain 2 pages:
-- Items list page
-- Item page
+- [Ruby Version](#ruby-version)  
+- [System Dependencies](#system-dependencies)  
+- [Setup / Installation](#setup--installation)  
+- [Database](#database)  
+- [Running the App](#running-the-app)  
+- [Running Tests](#running-tests)  
+- [API Endpoints](#api-endpoints)  
+- [Frontend Pages](#frontend-pages)
 
-Feel free to use whatever you are confortable to buildout the pages, Tailwind, SCSS, CSS, Bootstrap.
+---
 
-## The Backend
-The Backend is the data part of the challenge. This system will store the data needed for the Frontend to display the contents on the webpage. This system should contain:
-- A model (table) named Item
-  - With the properties:
-    - Name
-    - Description
-    - Number
-    - Status
-      - Available
-      - Decommissioned
-      - Expired
-    - Image (bonus)
+## Ruby Version
 
-- Have at least two endpoints, that should return the information from the model (Item)
-  - GET /items
-  - GET /items/:id
+- Ruby 3.2.2  
+- Rails 7.1.6
 
+---
+
+## System Dependencies
+
+- PostgreSQL (or SQLite3 if you prefer local testing)  
+- Node.js & Yarn (for Rails frontend assets if needed)  
+- Bundler (`gem install bundler`)
+
+---
+
+## Setup / Installation
+
+Clone the repository:
+
+```bash
+git clone <repo-url>
+cd resco_code_challenge
