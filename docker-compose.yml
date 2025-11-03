@@ -1,0 +1,47 @@
+version: "3.9"
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: resco_backend
+    environment:
+      RAILS_ENV: development
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./backend:/rails
+    command: ./bin/rails server -b 0.0.0.0 -p 3000
+    depends_on:
+      - db
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: resco_frontend
+    environment:
+      RAILS_ENV: development
+    ports:
+      - "3001:3000"
+    volumes:
+      - ./frontend:/rails
+    command: ./bin/rails server -b 0.0.0.0 -p 3000
+    depends_on:
+      - backend
+
+  db:
+    image: postgres:15
+    container_name: resco_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: resco_development
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
